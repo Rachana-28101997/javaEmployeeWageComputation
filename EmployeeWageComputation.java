@@ -2,10 +2,10 @@ public class EmployeeWageComputation
 {
         static final int IS_FULL_TIME=1,IS_PART_TIME=2,WAGE_PER_HR=20,WORKING_DAYS=20;
         static final int MAX_WORKING_HRS=100;
-        public static void main(String[] args)
+
+        public static void computeEmpWage()
         {
-		System.out.println("WELCOME TO EMPLOYEE WAGE COMPUTATION");
-                int workingHrs=0,salary,totalSalary=0,totalWorkingHrs=0,totalWorkingDays=0;
+                 int workingHrs=0,salary,totalSalary=0,totalWorkingHrs=0,totalWorkingDays=0;
                 while (totalWorkingDays < WORKING_DAYS && totalWorkingHrs <= MAX_WORKING_HRS)
                 {
                         totalWorkingDays++;
@@ -28,6 +28,11 @@ public class EmployeeWageComputation
                 totalSalary=totalWorkingHrs*WAGE_PER_HR;
 
                 System.out.println("Employee Earns "+totalSalary+" This Month");
+        }
 
+        public static void main(String[] args)
+        {
+
+                computeEmpWage();
         }
 }
