@@ -1,4 +1,4 @@
-public class EmpWageComputationUC5
+public class EmployeeWageComputation
 {
         static final int IS_FULL_TIME=1,IS_PART_TIME=2,WAGE_PER_HR=20,WORKING_DAYS=20;
         public static void main(String[] args)
