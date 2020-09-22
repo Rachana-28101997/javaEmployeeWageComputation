@@ -1,12 +1,14 @@
 public class EmployeeWageComputation
 {
         static final int IS_FULL_TIME=1,IS_PART_TIME=2,WAGE_PER_HR=20,WORKING_DAYS=20;
+        static final int MAX_WORKING_HRS=100;
         public static void main(String[] args)
         {
-
-                int workingHrs=0,salary,totalSalary=0;
-                for(int day=1;day<=WORKING_DAYS;day++)
+		System.out.println("WELCOME TO EMPLOYEE WAGE COMPUTATION");
+                int workingHrs=0,salary,totalSalary=0,totalWorkingHrs=0,totalWorkingDays=0;
+                while (totalWorkingDays < WORKING_DAYS && totalWorkingHrs <= MAX_WORKING_HRS)
                 {
+                        totalWorkingDays++;
                         int random=(int)Math.floor(Math.random()*10)%3;
 
                         switch(random)
@@ -20,11 +22,10 @@ public class EmployeeWageComputation
                                 default:
                                                                 workingHrs=0;
                         }
-
-                        salary=WAGE_PER_HR*workingHrs;
-                        totalSalary+=salary;
+                        totalWorkingHrs +=workingHrs;
+                        System.out.println("Emp totalWorkingHrs:" +totalWorkingHrs + "Emp totalWorkingDays:" +totalWorkingDays);
                 }
-
+                totalSalary=totalWorkingHrs*WAGE_PER_HR;
 
                 System.out.println("Employee Earns "+totalSalary+" This Month");
 
