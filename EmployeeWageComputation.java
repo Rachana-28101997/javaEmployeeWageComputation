@@ -1,62 +1,126 @@
-public class EmployeeWageComputation
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class Company
 {
-        static final int IS_FULL_TIME=1,IS_PART_TIME=2;
 
-        private final String company;
-        private final int wagePerHr;
-        private final int numOfWorkingDays;
-        private final int maxHoursPerMonth;
-        private int totalSalary;
+        public final String company;
+        public final int wagePerHr;
+        public final int numbOfWorkingDays;
+        public final int numbWorkingHrs;
 
-        public EmployeeWageComputation(String company, int wagePerHr, int numOfworkingDays, int maxHoursPerMonth)
+        public Company(String company,int wagePerHr,int numbOfWorkingDays,int numbWorkingHrs)
         {
                 this.company=company;
                 this.wagePerHr=wagePerHr;
-                this.numOfWorkingDays=numOfworkingDays;
-                this.maxHoursPerMonth=maxHoursPerMonth;
+                this.numbOfWorkingDays=numbOfWorkingDays;
+                this.numbWorkingHrs=numbWorkingHrs;
         }
 
+}
 
+public class EmployeeWageComputation
+{
 
+        public static final int FULL_TIME=1;
+        public static final int PART_TIME=2;
 
-        public void computeEmpWage()
+        public static void calculateEmpWage(Company company)
         {
-                 int workingHrs=0,salary,totalWorkingHrs=0,totalWorkingDays=0;
-                	while (totalWorkingDays < numOfWorkingDays && totalWorkingHrs <= maxHoursPerMonth)
-                	{
-                        	totalWorkingDays++;
-                        	int random=(int)Math.floor(Math.random()*10)%3;
-				System.out.println(random);
-                        	switch(random)
-                        	{
-                                	case IS_PART_TIME:
-                                                       workingHrs=4;
-                                                       break;
-                                	case IS_FULL_TIME:
-                                                        workingHrs=8;
-                                                        break;
-                                	default:
-                                               workingHrs=0;
-                        	}
-                        	totalWorkingHrs +=workingHrs;
-                        	System.out.println("Emp totalWorkingHrs:" +totalWorkingHrs + "Emp totalWorkingDays:" +totalWorkingDays);
-                	}
-                	totalSalary=totalWorkingHrs*wagePerHr;
+        int currentWorkingHour=0;
+        int currentWorkingday=0;
+        int salary,workingHr=0;
+        int totalSalary=0;
 
+        while( company.numbOfWorkingDays>=currentWorkingday && company.numbWorkingHrs>=currentWorkingHour )
+        {
+                int random=(int)Math.floor(Math.random()*10)%3;
+		System.out.println(random); 
+               switch(random)
+                {
+                        case FULL_TIME:
+                        workingHr=8;
+                        break;
+
+                        case PART_TIME:
+                        workingHr=4;
+                        break;
+
+                       default:
+                       workingHr=0;
+                 }
+                        currentWorkingday++;
+                        salary=workingHr*company.wagePerHr;
+//                       System.out.println("Daily salary for "+company.company+" "+salary);
+
+                        totalSalary+=salary;
         }
+                System.out.println("Total computed salary for "+company.company+" "+totalSalary);
 
-        public String toString()
+}
+
+        public static ArrayList readInputsFromUser()
         {
-                return "Total Emp Wage For Company: " +company+ " is: " +totalSalary;
+                ArrayList<Company> companyDetails = new ArrayList<Company>();
+                System.out.println("please enter number of companies");
+                Scanner sc=new Scanner(System.in);
+                int n=sc.nextInt();
+
+                for(int i=0;i<n;i++)
+                {
+                        String company="";
+                        int workPerHr=0;
+                        int numbOfWorkingDays=0;
+                        int numbWorkingHrs=0;
+
+                        Scanner sc1=new Scanner(System.in);
+                        System.out.println("please enter company name:");
+                        company=sc1.nextLine();
+
+                        System.out.println("please enter workPerHr:");
+                        workPerHr=sc1.nextInt();
+
+                        System.out.println("please enter numberofworkingdays:");
+                        numbOfWorkingDays=sc1.nextInt();
+
+                        System.out.println("please enter numberofworkingHrs:");
+                        numbWorkingHrs=sc1.nextInt();
+
+                        Company com=new Company(company,workPerHr,numbOfWorkingDays,numbWorkingHrs);
+                        companyDetails.add(com);
+
+                }
+                return companyDetails;
         }
 
         public static void main(String[] args)
         {
-                EmployeeWageComputation object=new EmployeeWageComputation("unisis", 20, 2, 10);
-                EmployeeWageComputation object1=new EmployeeWageComputation("microsoft", 20, 2, 10);
-                object.computeEmpWage();
-                System.out.println(object);
-                object1.computeEmpWage();
-                System.out.println(object1);
-        }
+                ArrayList<Company> array=readInputsFromUser();
+                Company c=null;
+                for(Company c2:array)
+                {
+                        String company="";
+                        int wagePerHr=0;
+                        int workingDays=0;
+                        int workingHrs=0;
+
+                        company=c2.company.toString();
+                        System.out.println("company "+company);
+
+                        wagePerHr=(int)c2.wagePerHr;
+                        System.out.println("wageperhr "+wagePerHr);
+
+                        workingDays=(int)c2.numbOfWorkingDays;
+                        System.out.println("workingDays "+workingDays);
+
+                        workingHrs=(int)c2.numbWorkingHrs;
+                        System.out.println("workingHrs "+workingHrs);
+
+                        c=new Company(company,wagePerHr,workingDays,workingHrs);
+//                      TestEmp object=new TestEmp();
+                        calculateEmpWage(c);
+
+                }
+
+         }
 }
