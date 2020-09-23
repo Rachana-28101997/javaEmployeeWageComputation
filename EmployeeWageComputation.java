@@ -3,6 +3,7 @@ public class EmployeeWageComputation
         static final int IS_FULL_TIME=1,IS_PART_TIME=2;
 
         public  void computeEmpWage(String company, int wagePerHr, int numOfWorkingDays, int maxHoursPerMonth)
+
         {
                  int workingHrs=0,salary,totalSalary=0,totalWorkingHrs=0,totalWorkingDays=0;
                		 while (totalWorkingDays < numOfWorkingDays && totalWorkingHrs <= maxHoursPerMonth)
@@ -31,10 +32,7 @@ public class EmployeeWageComputation
 
         public static void main(String[] args)
         {
-		EmployeeWageComputation emp=new EmployeeWageComputation();
-
-                emp.computeEmpWage("HP",20,20,50);
-                emp.computeEmpWage("BridgeLabs",30,20,50);
-
+		EmployeeWageComputation emp=new EmployeeWageComputation ();
+		emp.computeEmpWage();
         }
 }
