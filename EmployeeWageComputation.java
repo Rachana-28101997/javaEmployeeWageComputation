@@ -26,7 +26,7 @@ public class EmployeeWageComputation
                 	{
                         	totalWorkingDays++;
                         	int random=(int)Math.floor(Math.random()*10)%3;
-
+				System.out.println(random);
                         	switch(random)
                         	{
                                 	case IS_PART_TIME:
