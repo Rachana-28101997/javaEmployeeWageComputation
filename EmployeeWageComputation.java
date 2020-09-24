@@ -42,7 +42,7 @@ public class EmployeeWageComputation implements EmployeeWageComp
         while( company.numbOfWorkingDays>=currentWorkingday && company.numbWorkingHrs>=currentWorkingHour )
         {
                 int random=(int)Math.floor(Math.random()*10)%3;
-                System.out.println(random);
+
                switch(random)
                 {
                         case FULL_TIME:
@@ -61,6 +61,9 @@ public class EmployeeWageComputation implements EmployeeWageComp
 //                       System.out.println("Daily salary for "+company.company+" "+salary);
 
                         totalSalary+=salary;
+                        wageOnDailyBasis(currentWorkingday, workingHr, totalSalary);
+
+
         }
                 System.out.println("Total computed salary for "+company.company+" "+totalSalary);
 
@@ -133,4 +136,12 @@ public class EmployeeWageComputation implements EmployeeWageComp
                 }
 
          }
+
+
+
+        public void wageOnDailyBasis( int currentWorkingday, int workingHr, int totalSalary) {
+                System.out.println(workingHr + " Hrs worked on Day " + currentWorkingday + ", wage of employee is " + totalSalary);
+        }
+
+
 }
