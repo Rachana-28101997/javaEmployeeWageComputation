@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.*;
 
 class Company
 {
@@ -20,7 +21,7 @@ class Company
 }
 
 interface EmployeeWageComp{
-        public abstract void calculateEmpWage(Company company);
+        public abstract Map<String,Integer> calculateEmpWage(Company company);
         public abstract ArrayList readInputsFromUser();
 
 }
@@ -32,12 +33,14 @@ public class EmployeeWageComputation implements EmployeeWageComp
         public static final int PART_TIME=2;
 
         @Override
-        public void calculateEmpWage(Company company)
+        public Map<String,Integer> calculateEmpWage(Company company)
         {
         int currentWorkingHour=0;
         int currentWorkingday=0;
         int salary,workingHr=0;
         int totalSalary=0;
+
+        Map<String,Integer> cmpGag =  new HashMap<String,Integer>();
 
         while( company.numbOfWorkingDays>=currentWorkingday && company.numbWorkingHrs>=currentWorkingHour )
         {
@@ -66,6 +69,9 @@ public class EmployeeWageComputation implements EmployeeWageComp
 
         }
                 System.out.println("Total computed salary for "+company.company+" "+totalSalary);
+                cmpGag.put(company.company,totalSalary);
+
+                return cmpGag;
 
 }
         @Override
@@ -79,7 +85,7 @@ public class EmployeeWageComputation implements EmployeeWageComp
                 for(int i=0;i<n;i++)
                 {
                         String company="";
-                        int wagePerHr=0;
+                        int workPerHr=0;
                         int numbOfWorkingDays=0;
                         int numbWorkingHrs=0;
 
@@ -87,8 +93,8 @@ public class EmployeeWageComputation implements EmployeeWageComp
                         System.out.println("please enter company name:");
                         company=sc1.nextLine();
 
-                        System.out.println("please enter wagePerHr:");
-                        wagePerHr=sc1.nextInt();
+                        System.out.println("please enter workPerHr:");
+                        workPerHr=sc1.nextInt();
 
                         System.out.println("please enter numberofworkingdays:");
                         numbOfWorkingDays=sc1.nextInt();
@@ -96,7 +102,7 @@ public class EmployeeWageComputation implements EmployeeWageComp
                         System.out.println("please enter numberofworkingHrs:");
                         numbWorkingHrs=sc1.nextInt();
 
-                        Company com=new Company(company,wagePerHr,numbOfWorkingDays,numbWorkingHrs);
+                        Company com=new Company(company,workPerHr,numbOfWorkingDays,numbWorkingHrs);
                         companyDetails.add(com);
 
                 }
@@ -110,6 +116,8 @@ public class EmployeeWageComputation implements EmployeeWageComp
 
                 ArrayList<Company> array=empComp.readInputsFromUser();
                 Company c=null;
+                 Map<String,Integer> cmpMaps =  new HashMap<String,Integer>();
+
                 for(Company c2:array)
                 {
                         String company="";
@@ -131,9 +139,16 @@ public class EmployeeWageComputation implements EmployeeWageComp
 
                         c=new Company(company,wagePerHr,workingDays,workingHrs);
 //                      TestEmp object=new TestEmp();
-                        empComp.calculateEmpWage(c);
+                        cmpMaps = empComp.calculateEmpWage(c);
 
                 }
+                System.out.println("Enter company name to get total wage");
+
+                Scanner sc = new Scanner(System.in);
+                String comName = sc.nextLine();
+
+                Integer totalG = cmpMaps.get(comName);
+                System.out.println("Total Gague fot "+comName +" is "+totalG);
 
          }
 
