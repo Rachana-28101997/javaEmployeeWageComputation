@@ -19,20 +19,13 @@ class Company
 
 }
 
-interface EmployeeWageComp{
-        public abstract void calculateEmpWage(Company company);
-        public abstract ArrayList readInputsFromUser();
-
-}
-
-public class EmployeeWageComputation implements EmployeeWageComp
+public class EmployeeWageComputation
 {
 
         public static final int FULL_TIME=1;
         public static final int PART_TIME=2;
 
-        @Override
-        public void calculateEmpWage(Company company)
+        public static void calculateEmpWage(Company company)
         {
         int currentWorkingHour=0;
         int currentWorkingday=0;
@@ -42,20 +35,20 @@ public class EmployeeWageComputation implements EmployeeWageComp
         while( company.numbOfWorkingDays>=currentWorkingday && company.numbWorkingHrs>=currentWorkingHour )
         {
                 int random=(int)Math.floor(Math.random()*10)%3;
-                System.out.println(random);
-               switch(random)
-                {
-                        case FULL_TIME:
-                        workingHr=8;
-                        break;
+		System.out.println(random); 
+	               switch(random)
+        	        {
+                	        case FULL_TIME:
+                        	workingHr=8;
+                        	break;
 
-                        case PART_TIME:
-                        workingHr=4;
-                        break;
+                        	case PART_TIME:
+                        	workingHr=4;
+                        	break;
 
-                       default:
-                       workingHr=0;
-                 }
+                       		default:
+                      		workingHr=0;
+                 	}
                         currentWorkingday++;
                         salary=workingHr*company.wagePerHr;
 //                       System.out.println("Daily salary for "+company.company+" "+salary);
@@ -65,8 +58,8 @@ public class EmployeeWageComputation implements EmployeeWageComp
                 System.out.println("Total computed salary for "+company.company+" "+totalSalary);
 
 }
-        @Override
-        public ArrayList readInputsFromUser()
+
+        public static ArrayList readInputsFromUser()
         {
                 ArrayList<Company> companyDetails = new ArrayList<Company>();
                 System.out.println("please enter number of companies");
@@ -76,7 +69,7 @@ public class EmployeeWageComputation implements EmployeeWageComp
                 for(int i=0;i<n;i++)
                 {
                         String company="";
-                        int wagePerHr=0;
+                        int workPerHr=0;
                         int numbOfWorkingDays=0;
                         int numbWorkingHrs=0;
 
@@ -84,8 +77,8 @@ public class EmployeeWageComputation implements EmployeeWageComp
                         System.out.println("please enter company name:");
                         company=sc1.nextLine();
 
-                        System.out.println("please enter wagePerHr:");
-                        wagePerHr=sc1.nextInt();
+                        System.out.println("please enter workPerHr:");
+                        workPerHr=sc1.nextInt();
 
                         System.out.println("please enter numberofworkingdays:");
                         numbOfWorkingDays=sc1.nextInt();
@@ -93,7 +86,7 @@ public class EmployeeWageComputation implements EmployeeWageComp
                         System.out.println("please enter numberofworkingHrs:");
                         numbWorkingHrs=sc1.nextInt();
 
-                        Company com=new Company(company,wagePerHr,numbOfWorkingDays,numbWorkingHrs);
+                        Company com=new Company(company,workPerHr,numbOfWorkingDays,numbWorkingHrs);
                         companyDetails.add(com);
 
                 }
@@ -102,10 +95,7 @@ public class EmployeeWageComputation implements EmployeeWageComp
 
         public static void main(String[] args)
         {
-
-                EmployeeWageComp empComp = new EmployeeWageComputation();
-
-                ArrayList<Company> array=empComp.readInputsFromUser();
+                ArrayList<Company> array=readInputsFromUser();
                 Company c=null;
                 for(Company c2:array)
                 {
@@ -128,7 +118,7 @@ public class EmployeeWageComputation implements EmployeeWageComp
 
                         c=new Company(company,wagePerHr,workingDays,workingHrs);
 //                      TestEmp object=new TestEmp();
-                        empComp.calculateEmpWage(c);
+                        calculateEmpWage(c);
 
                 }
 
